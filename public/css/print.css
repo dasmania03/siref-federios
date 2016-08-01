@@ -1,0 +1,171 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+h1, h2, h3 {
+    text-align: center;
+}
+
+.logo{
+    text-align: center;
+}
+
+.logo img {
+    max-height: 2em;
+    margin: .5em;
+}
+
+.main-header {
+    background: #1FACCA;
+}
+
+.imprimir {
+    background: #fff;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+    margin-top: 0.8em;
+}
+
+.imprimir th {
+    background: #1FACCA;
+    line-height: 2.5;
+    color: #fff;
+    font-weight: normal;
+}
+
+.imprimir td {
+    border-bottom: 1px solid rgba(122, 169, 60, 0.15);
+}
+
+.imprimir td {
+    line-height: 1.7;
+    font-size: .8em;
+    padding: 0 .5em;
+}
+
+.title {
+    font-weight: bold;
+}
+
+.main-footer {
+    background: #3A383D;
+    color: #F6F6F6;
+    margin-top: 0.5em;
+    font-size: .8em;
+    text-align: center;
+}
+
+.firma{
+    width: 100%;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 4.5em 0 0.8em;
+}
+
+.observacion{
+    font-size: .8em;
+    margin-top: .5em;
+}
+
+/* Css para el comprobante de pago */
+.comprobante {
+    font-family: arial, sans-serif;
+}
+
+.comprobante:nth-child(1) {
+    margin-bottom: 8em;
+}
+
+.comprobante p {
+    margin: 0;
+}
+
+.bodycontainer {
+    width: 100%;
+    background: #fff;
+    border-collapse: collapse;
+    margin-bottom: 1em;
+}
+
+.bodycontainer__row {
+    background: #198aa2;
+    line-height: 2;
+}
+
+.bodycontainer__col {
+    color: #fff;
+}
+
+.bodycontainer--title {
+    font-size: 1.7em;
+    line-height: 2;
+    text-align: center;
+}
+
+.bodycontainer img {
+    padding: 0 1em;
+    margin: .5em auto;
+    width: 140px;
+    height: auto;
+}
+
+.bodycontainer__detalle {
+    font-size: .7em;
+    background: #198aa2;
+    color: #fff;
+    padding: 0 1em;
+}
+
+.bodycontainer__serie {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #e1353d;
+    text-align: center;
+    border: 1px solid #198aa2;
+    line-height: 1.2;
+}
+
+.maincontainer {
+    width: 100%;
+    background: #fff;
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+    line-height: 2;
+    font-size: 1.1em;
+}
+
+.maincontainer td {
+    border-bottom: 1px solid rgba(122, 169, 60, 0.15);
+}
+
+.maincontainer__title {
+    font-weight: bold;
+}
+
+.footercontainer {
+    width: 100%;
+    background: #fff;
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+    line-height: 2;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.footercontainer__firma {
+    color: #fff;
+    line-height: 3.5em;
+}
+
+.footercontainer__title {
+    border-top: 1px solid #aaa;
+    text-align: center;
+}

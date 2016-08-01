@@ -1,0 +1,122 @@
+.page-home{
+	text-align: center;
+	&__enlace{
+		display: inline-block;
+		line-height: 4;
+		padding: 0 4em;
+		background: darken($blue_color,15);
+		color: #fff;
+		margin: 1em;
+		&:hover{
+			background:darken($blue_color,5)
+		}
+	}
+}
+
+.buton-search [type="submit"] {
+	margin-top: 0;
+}
+.form-search{
+	width: 40%;
+}
+.form-registro{
+	width: 100%;	
+}
+.form-pago{
+	text-align: center;
+	width: 100%;	
+	margin-top: 0;
+	margin-bottom: 3em;
+	[type="text"]{
+		text-align: center;
+	}
+}
+.form-login{
+	width: 100%;	
+}
+
+.comprobante{
+	font-family: arial, sans-serif;
+	&:nth-child(1){
+		margin-bottom: 8em;
+		
+	}
+	hr{
+		margin: .2em 0 .5em;
+	}
+	p{
+		margin: 0;
+	}
+}
+
+.bodycontainer{
+	width: 100%;
+	background : #fff;
+	margin-left : auto;
+	margin-right : auto;
+	border-collapse: collapse;
+	line-height : 1;
+	&__row{
+		background: darken($blue_color,9);
+	}
+	&__col{
+		color: #fff;
+	}
+	&--title{
+		font-size: 1.8em;
+		text-align: center;
+	}
+	img{
+		max-height: 60%;
+		padding: 0 1em;
+		margin: .5em auto;
+	}
+	&__detalle{
+		font-size: .7em;
+		background: darken($blue_color,9);
+		color: #fff;
+		padding: 0 1em;
+	}
+	&__serie{
+		font-size: 1.5em;
+		font-weight: bold;
+		color: #e1353d;
+		text-align: center;
+		border: 1px solid darken($blue_color,9);
+		line-height: 1.2;
+	}
+}
+
+.maincontainer{
+	width: 100%;
+	background : #fff;
+	margin-left : auto;
+	margin-right : auto;
+	border-collapse: collapse;
+	line-height : 2;
+	font-size: 1.1em;
+	td{
+		border-bottom : 1px solid rgba($sucess_color, .15);
+	}
+	&__title{
+		font-weight: bold;
+	}
+}
+
+.footercontainer{
+	width: 100%;
+	background : #fff;
+	margin-left : auto;
+	margin-right : auto;
+	border-collapse: collapse;
+	line-height : 2;
+	font-size: 1.2em;
+	font-weight: bold;
+	&__firma{
+		height: 5em;
+	}
+	&__title{
+		border-top: 1px solid #aaa;
+		text-align: center;
+	}
+}
