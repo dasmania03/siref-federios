@@ -1,5 +1,5 @@
 <div class="header-system">
-    {!! link_to('#', $title = ' Nuevo', $attributes = ['id' => 'nuevo', 'class' => 'boton boton-primary icon-plus-circle'], $secure = null) !!}
+    {!! link_to($enlace, $title = ' Nuevo', $attributes = ['id' => 'nuevo', 'class' => 'boton boton-primary icon-plus-circle'], $secure = null) !!}
     {!! Form::model(Request::only(['name']), ['method' => 'GET' ,'route' => $ruta, 'role' => 'search']) !!}
     <div class="form-item ed-container">
         <div class="ed-item base-70" style="display: flex">

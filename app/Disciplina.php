@@ -17,4 +17,8 @@ class Disciplina extends Model
     public function fichas(){
         return $this->hasMany('App\Ficha', 'disciplina_id', 'id_disciplina');
     }
+
+    public function productos(){
+        return $this->hasMany('App\Productos', 'disciplina_id', 'id_disciplina');
+    }
 }

@@ -1,7 +1,7 @@
 {!! Form::open(['method' => 'GET', 'onsubmit'=>'return validarcedula("search")', 'class' => 'form-search', 'role' => 'search']) !!}
 <div class="form-item ed-container">
     <div class="ed-item base-25">
-        {!! Form::label('search','Identificación') !!}
+        {!! Form::label('search','Cédula') !!}
     </div>
     <div class="ed-item base-55">
         {!! Form::text('search',null,['id' =>  'search']) !!}

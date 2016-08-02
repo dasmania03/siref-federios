@@ -2,7 +2,7 @@
 @section('contenido')
     @include('system.representante.partials.editmodal')
     <h1>Representantes</h1>
-    @include('system.partials.header', ['ruta' => 'system.representante.index'])
+    @include('system.partials.header', ['enlace' => '#' ,'ruta' => 'system.representante.index'])
     <p class="info-register">Hay {{ $representantes->total() }} registos en total</p>
     <table class="listado">
         <thead>

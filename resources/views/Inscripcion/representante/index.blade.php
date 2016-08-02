@@ -20,7 +20,3 @@
         </div>
     </main>
 @stop
-
-{{--@foreach($rep as $r)--}}
-{{--{{$r->apellido}}--}}
-{{--@endforeach--}}

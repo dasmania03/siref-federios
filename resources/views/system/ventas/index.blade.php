@@ -2,7 +2,7 @@
 @section('contenido')
     {{--@include('system.representante.partials.editmodal')--}}
     <h1>Ventas</h1>
-    @include('system.partials.header', ['ruta' => 'system.ventas.index'])
+    @include('system.partials.header', ['enlace' => '#' ,'ruta' => 'system.ventas.index'])
     <p class="info-register">Hay {{ $ventas->total() }} ventas</p>
     <table class="listado">
         <thead>

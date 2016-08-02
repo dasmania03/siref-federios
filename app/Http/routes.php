@@ -38,4 +38,6 @@ Route::group(['middleware' => ['auth']], function(){
 
     Route::resource('system/ventas','VentasController');
     Route::get('system/ventas/printcomprobante/{id}','VentasController@getPrintComprobante');
+
+    Route::resource('system/productos', 'ProductosController');
 });

@@ -31,6 +31,9 @@ class Ficha extends Model
     public function horario(){
         return $this->belongsTo('App\Horarios');
     }
+    public function mensualidad(){
+        return $this->hasOne('App\Mensualidad');
+    }
 
     public function scopeBuscar($query, $idficha){
         if(trim($idficha) != ""){
