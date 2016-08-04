@@ -18,11 +18,13 @@ class Productos extends Model
         'precio'
     ];
 
+    // Un producto puede tener una disciplina
     public function disciplina(){
         return $this->belongsTo('App\Disciplina');
     }
 
+    // Un producto puede estar en varias mensualidades
     public function mensualidades(){
-        return $this->hasMany('App\Mensualidad');
+        return $this->hasMany('App\Mensualidad', 'id_producto', 'producto_id');
     }
 }

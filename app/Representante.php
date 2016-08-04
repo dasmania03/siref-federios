@@ -19,18 +19,21 @@ class Representante extends Model
         'email'
     ];
 
-    public function deportistas(){
-        return $this->hasMany('App\Deportista', 'representante_id', 'id_representante');
-    }
-
+    //  Un representante puede estar en varias fichas
     public function fichas(){
-        return $this->hasMany('App\Ficha', 'representante_id', 'id_representante');
+        return $this->hasMany('App\Ficha', 'id_representante', 'representante_id');
     }
 
+    //Un representante puede tener varios deportistas
+    public function deportistas(){
+        return $this->hasMany('App\Deportista', 'id_representante', 'representante_id');
+    }
+    
+    //  scope functions //
     public function scopeBuscar($query, $name){
         if(trim($name) != ""){
             $query->where("identificacion", $name)
-                ->orWhere("apellido", "LIKE", "%$name%");
+                ->orWhere("apellido", "LIKE", strtoupper("%$name%"));
         }
     }
 }

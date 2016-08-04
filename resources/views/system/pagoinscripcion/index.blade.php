@@ -4,7 +4,7 @@
     @include('system.pagoinscripcion.partials.viewmodal')
     @include('system.pagoinscripcion.partials.salemodal')
     <h1>Módulo de Cobro de Inscripciones</h1>
-    @include('system.partials.header', ['enlace' => '#' ,'ruta' => 'system.pago-inscripcion.index'])
+    @include('system.partials.header', ['enlace' => ['url' => '/representante', 'title' => ' Nueva Ficha'] ,'ruta' => 'system.pago-inscripcion.index'])
     <p class="info-register">Hay {{ $fichas->total() }} fichas registradas</p>
     <table class="listado">
         <thead>

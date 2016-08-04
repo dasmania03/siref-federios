@@ -27,18 +27,21 @@ class Deportista extends Model
         'representante_id'
     ];
 
+    // Un deportista puede tener un representante
     public function representante(){
         return $this->belongsTo('App\Representante');
     }
-
-    public function fichas(){
-        return $this->hasMany('App\Ficha', 'deportista_id', 'id_deportista');
+    
+    // Un deportista puede estar en varias fichas //
+    public function ficha(){
+        return $this->hasMany('App\Ficha', 'id_deportista','deportista_id');
     }
-
+    
+    //  scope functions //
     public function scopeBuscar($query, $name){
         if(trim($name) != ""){
             $query->where("identificacion", $name)
-                ->orWhere('apellido', 'LIKE', "%$name%");
+                ->orWhere('apellido', 'LIKE', strtoupper("%$name%"));
         }
     }
 }

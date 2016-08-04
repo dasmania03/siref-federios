@@ -1,7 +1,7 @@
 @extends('layouts.system')
 @section('contenido')
     <h1>Lista de Productos</h1>
-    @include('system.partials.header', ['enlace' => 'system/productos/create' ,'ruta' => 'system.productos.index'])
+    @include('system.partials.header', ['enlace' => ['url' => 'system/productos/create', 'title' => ' Nuevo Producto'] ,'ruta' => 'system.productos.index'])
     <p class="info-register">Hay {{ $productos->total() }} productos</p>
     <table class="listado">
         <thead>

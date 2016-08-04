@@ -15,11 +15,12 @@ class Mensualidad extends Model
         'producto_id',
         'mensualidad'
     ];
-
+    
+    // Una ficha puede tener una mensualidad
     public function ficha(){
-        return $this->belongsTo('App\Ficha');
+        return $this->hasOne('App\Ficha', 'id_ficha', 'ficha_id');
     }
-
+    // una mensualidad puede tener un producto
     public function producto(){
         return $this->belongsTo('App\Productos');
     }

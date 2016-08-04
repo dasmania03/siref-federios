@@ -15,10 +15,12 @@ class Horarios extends Model
         'disciplina_id'
     ];
 
+    // Un horario puede estar en varias fichas
     public function fichas(){
-        return $this->hasMany('App\Ficha', 'horario_id', 'id_horario');
+        return $this->hasMany('App\Ficha', 'id_horario', 'horario_id');
     }
-
+    
+    //  functions   //
     public static function horarios($id){
         return Horarios::where('disciplina_id','=', $id)->get();
     }

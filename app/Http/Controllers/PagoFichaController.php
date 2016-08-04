@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Disciplina;
 use App\Ficha;
+use App\Mensualidad;
 use App\Ventas;
 use Illuminate\Http\Request;
 
@@ -13,11 +14,6 @@ use Illuminate\Support\Facades\Session;
 
 class PagoFichaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         $fichas = Ficha::join('deportista', 'ficha.deportista_id', '=', 'deportista.id_deportista')
@@ -36,22 +32,11 @@ class PagoFichaController extends Controller
         return view('system.pagoinscripcion.index', compact('fichas', 'disciplinas'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $user = Auth::user();
@@ -68,16 +53,17 @@ class PagoFichaController extends Controller
         $ficha->estado = 1;
         $ficha->save();
 
+//        Para crear un registro en la tabla de mensualidades
+        $mensualidad = Mensualidad::create([
+            'ficha_id' => $ficha->id_ficha,
+            'producto_id' => $ficha->lol,
+            'mensualidades' => '{}'
+        ]);
+
         Session::flash('success_message', 'Venta realizada exitosamente, imprimir comprobante de pago');
         return view('system/pagoinscripcion/showcomprobante', ['idventa' => $venta['id_venta']]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $fichas = Ficha::join('deportista', 'ficha.deportista_id', '=', 'deportista.id_deportista')
@@ -93,24 +79,11 @@ class PagoFichaController extends Controller
         return response()->json($fichas['0']);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         if ($request->ajax()){
@@ -130,12 +103,6 @@ class PagoFichaController extends Controller
         ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //

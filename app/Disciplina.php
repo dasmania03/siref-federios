@@ -13,12 +13,14 @@ class Disciplina extends Model
     protected $fillable = [
         'nombre'
     ];
-
+    
+    // Una disciplina puede estar en varias fichas
     public function fichas(){
-        return $this->hasMany('App\Ficha', 'disciplina_id', 'id_disciplina');
+        return $this->hasMany('App\Ficha', 'id_disciplina', 'disciplina_id');
     }
 
+    // una disciplina puede estar en varios productos
     public function productos(){
-        return $this->hasMany('App\Productos', 'disciplina_id', 'id_disciplina');
+        return $this->hasMany('App\Productos', 'id_disciplina', 'disciplina_id');
     }
 }
