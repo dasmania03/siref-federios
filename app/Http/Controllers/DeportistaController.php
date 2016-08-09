@@ -12,7 +12,7 @@ class DeportistaController extends Controller
 {
     public function index(Request $request)
     {
-        $deportistas = Deportista::buscar($request->get('name'))->orderby('id_deportista', 'ASC')->paginate();
+        $deportistas = Deportista::buscar($request->get('name'), $request->get('typesearch'))->orderby('id_deportista', 'ASC')->paginate();
         return view('system.deportista.index', compact('deportistas'));
     }
 

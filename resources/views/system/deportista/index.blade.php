@@ -3,7 +3,7 @@
     @include('system.deportista.partials.viewmodal')
     @include('system.deportista.partials.editmodal')
     <h1>Deportistas</h1>
-    @include('system.partials.header', ['enlace' => ['url' => '#', 'title' => ' Nuevo Deportista'] ,'ruta' => 'system.deportista.index'])
+    @include('system.partials.header', ['enlace' => ['url' => '#', 'title' => ' Nuevo Deportista'] ,'ruta' => 'system.deportista.index', 'campos' => ['cedula' => 'Cédula', 'flname' => 'Apellidos y Nombres']])
     <p class="info-register">Hay {{ $deportistas->total() }} registos en total</p>
     <table class="listado">
         <thead>

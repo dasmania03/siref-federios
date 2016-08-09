@@ -4,7 +4,7 @@
     @else
         <div></div>
     @endif
-    {!! Form::model(Request::only(['name']), ['method' => 'GET' ,'route' => $ruta, 'role' => 'search']) !!}
+    {!! Form::model(Request::all(), ['method' => 'GET' ,'route' => $ruta, 'role' => 'search']) !!}
     <div class="form-item ed-container">
         <div class="ed-item base-50" style="display: flex">
             {!! Form::text('name', null, ['placeholder' => 'Buscar...']) !!}

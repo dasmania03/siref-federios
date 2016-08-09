@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Disciplina;
 use App\Ficha;
 use App\Mensualidad;
+use App\Productos;
 use App\Ventas;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -16,18 +18,7 @@ class PagoFichaController extends Controller
 {
     public function index(Request $request)
     {
-        $fichas = Ficha::join('deportista', 'ficha.deportista_id', '=', 'deportista.id_deportista')
-            ->join('representante', 'ficha.representante_id', '=', 'representante.id_representante')
-            ->join('disciplinas', 'ficha.disciplina_id', '=', 'disciplinas.id_disciplina')
-            ->join('horarios', 'ficha.horario_id', '=', 'horarios.id_horario')
-            ->select('ficha.id_ficha', 'ficha.fecha', 'ficha.estado',
-                'deportista.id_deportista','deportista.identificacion as di', 'deportista.talla as dta', 'deportista.genero as dg', 'deportista.apellido as da', 'deportista.nombre as dn', 'deportista.fecha_nac as dfn', 'deportista.direccion as dd', 'deportista.telefono as dt', 'deportista.email as de', 'deportista.discapacidad', 'deportista.num_carnet', 'deportista.tipo_discapacidad', 'deportista.grado_discapacidad',
-                'representante.id_representante','representante.identificacion as ri', 'representante.apellido as ra', 'representante.nombre as rn', 'representante.direccion as rd', 'representante.telefono as rt', 'representante.email as re',
-                'disciplinas.id_disciplina','disciplinas.nombre as disciplina', 'horarios.id_horario','horarios.nombre as horario')
-            ->buscar($request->get('name'))
-            ->orderBy('id_ficha', 'ASC')
-            ->paginate();
-
+        $fichas = Ficha::buscar($request->get('name'), $request->get('typesearch'))->orderby('id_ficha', 'ASC')->paginate();
         $disciplinas = Disciplina::lists('nombre','id_disciplina');
         return view('system.pagoinscripcion.index', compact('fichas', 'disciplinas'));
     }
@@ -49,18 +40,27 @@ class PagoFichaController extends Controller
             'user_id' => $user['id'],
         ]);
 
-        $ficha = \App\Ficha::find($request['idfc']);
+        $ficha = Ficha::find($request['idfc']);
+        $date = explode('-', $ficha->deportista->fecha_nac);
+        $age = Carbon::createFromDate($date[0],$date[1],$date[2])->age;
+        $productos = Productos::get();
+        foreach ($productos as $producto){
+            if($ficha->disciplina_id == $producto->disciplina_id){
+                if(($age >= $producto->edad_min) && ($age <= $producto->edad_max)){
+                    Mensualidad::create([
+                        'ficha_id' => $ficha->id_ficha,
+                        'producto_id' => $producto->id_producto,
+                        'mensualidades' => '{}'
+                    ]);
+                    break;
+                }
+            }
+        }
+
         $ficha->estado = 1;
         $ficha->save();
 
-//        Para crear un registro en la tabla de mensualidades
-        $mensualidad = Mensualidad::create([
-            'ficha_id' => $ficha->id_ficha,
-            'producto_id' => $ficha->lol,
-            'mensualidades' => '{}'
-        ]);
-
-        Session::flash('success_message', 'Venta realizada exitosamente, imprimir comprobante de pago');
+        Session::flash('success_message', 'Venta realizada exitosamente, imprimir comprobante de pago, mensualidad actualizada');
         return view('system/pagoinscripcion/showcomprobante', ['idventa' => $venta['id_venta']]);
     }
 

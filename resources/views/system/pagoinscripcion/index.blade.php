@@ -4,7 +4,7 @@
     @include('system.pagoinscripcion.partials.viewmodal')
     @include('system.pagoinscripcion.partials.salemodal')
     <h1>Módulo de Cobro de Inscripciones</h1>
-    @include('system.partials.header', ['enlace' => ['url' => '/representante', 'title' => ' Nueva Ficha'] ,'ruta' => 'system.pago-inscripcion.index'])
+    @include('system.partials.header', ['enlace' => ['url' => '/representante', 'title' => ' Nueva Ficha'] ,'ruta' => 'system.pago-inscripcion.index', 'campos' => ['ficha' => 'N° Ficha', 'disciplina' => 'Deporte', 'deportista' => 'Cédula o Apellido Deportista', 'representante' => 'Cédula o Apellido Representante']])
     <p class="info-register">Hay {{ $fichas->total() }} fichas registradas</p>
     <table class="listado">
         <thead>
@@ -21,11 +21,11 @@
         <tbody>
         @foreach($fichas as $ficha)
             <tr data-id="{{ $ficha->id_ficha }}" data-idd="{{ $ficha->id_disciplina }}" data-idh="{{ $ficha->id_horario }}">
-                <td>{{$ficha->id_ficha}}</td>
-                <td>{{$ficha->disciplina}}</td>
-                <td>{{$ficha->horario}}</td>
-                <td>{{$ficha->da}} {{$ficha->dn}}</td>
-                <td>{{$ficha->ra}} {{$ficha->rn}}</td>
+                <td>{{ $ficha->id_ficha }}</td>
+                <td>{{ $ficha->disciplina->nombre }}</td>
+                <td>{{ $ficha->horario->nombre }}</td>
+                <td>{{ $ficha->deportista->apellido }} {{ $ficha->deportista->nombre }}</td>
+                <td>{{ $ficha->representante->apellido }} {{ $ficha->representante->nombre }}</td>
                 <td><a href="{{ ($ficha->estado) ? '#0' : '#' }}" class="{{ ($ficha->estado) ? 'paid icon-check-circle' : 'no-paid icon-times-circle' }}" title="{{ ($ficha->estado) ? 'Pagada' : 'No pagada' }}"></a></td>
                 <td>
                     <a href="#" class="action-menu action-plus icon-eye" title="Detalles"></a>
@@ -38,7 +38,7 @@
         </tbody>
     </table>
     <nav role="navigation">
-        {!! $fichas->appends(Request::only(['name']))->render() !!}
+        {!! $fichas->appends(Request::all())->render() !!}
     </nav>
 @endsection
 @section('script')

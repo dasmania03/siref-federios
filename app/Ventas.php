@@ -19,9 +19,9 @@ class Ventas extends Model
         'user_id'
     ];
 
-//    public function ficha(){
-//        return $this->hasMany('App\Deportista', 'representante_id', 'id_representante');
-//    }
+    public function ficha(){
+        return $this->belongsTo('App\Ficha');
+    }
 
     public function scopeBuscar($query, $name){
         if(trim($name) != ""){

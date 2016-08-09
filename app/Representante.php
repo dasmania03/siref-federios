@@ -30,10 +30,13 @@ class Representante extends Model
     }
     
     //  scope functions //
-    public function scopeBuscar($query, $name){
+    public function scopeBuscar($query, $name, $typesearch){
         if(trim($name) != ""){
-            $query->where("identificacion", $name)
-                ->orWhere("apellido", "LIKE", strtoupper("%$name%"));
+            if ($typesearch != "" && $typesearch == 'cedula'){
+                $query->where("identificacion", $name);
+            } elseif ($typesearch != "" && $typesearch == 'flname') {
+                $query->where("apellido", "LIKE", strtoupper("%$name%"));
+            }
         }
     }
 }

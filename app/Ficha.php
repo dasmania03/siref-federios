@@ -40,11 +40,32 @@ class Ficha extends Model
     public function mensualidad(){
         return $this->belongsTo('App\Mensualidad');
     }
+
+    // Una ficha puede tener muchas ventsa, inscripcion y mensualidades
+    public function ventas(){
+        return $this->hasMany('App\Ventas', 'ficha_id', 'id_ficha');
+    }
     
     //  scopes functiosns //
-    public function scopeBuscar($query, $idficha){
-        if(trim($idficha) != ""){
-            $query->where("id_ficha", $idficha);
+    public function scopeBuscar($query, $name, $typesearch){
+        if(trim($name) != ""){
+            if ($typesearch != "" && $typesearch == 'ficha'){
+                $query->where("id_ficha", $name);
+            } elseif ($typesearch != "" && $typesearch == 'disciplina') {
+                $query->whereHas('disciplina', function ($query) use ($name) {
+                    $query->where('nombre', 'LIKE', strtoupper("%$name%"));
+                });
+            } elseif ($typesearch != "" && $typesearch == 'deportista'){
+                $query->whereHas('deportista', function ($query) use ($name) {
+                    $query->where('identificacion', $name)
+                        ->orWhere('apellido', 'LIKE', strtoupper("%$name%"));
+                });
+            } elseif ($typesearch != "" && $typesearch == 'representante'){
+                $query->whereHas('representante', function ($query) use ($name) {
+                    $query->where('identificacion', $name)
+                        ->orWhere('apellido', 'LIKE', strtoupper("%$name%"));
+                });
+            }
         }
     }
 }
