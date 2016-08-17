@@ -79,7 +79,7 @@ h1, h2, h3 {
 }
 
 .comprobante:nth-child(1) {
-    margin-bottom: 8em;
+    margin-bottom: 6em;
 }
 
 .comprobante p {

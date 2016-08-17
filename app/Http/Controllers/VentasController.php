@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\NumtoLetter;
 use App\Ventas;
 use Illuminate\Http\Request;
 
@@ -47,16 +48,9 @@ class VentasController extends Controller
 
     public function getPrintComprobante($id)
     {
-        $venta = Ventas::join('ficha', 'ventas.ficha_id', '=', 'ficha.id_ficha')
-            ->join('representante', 'ficha.representante_id', '=', 'representante.id_representante')
-            ->join('disciplinas', 'ficha.disciplina_id', '=', 'disciplinas.id_disciplina')
-            ->select('ventas.id_venta', 'ventas.fecha', 'ventas.concepto', 'ventas.detalle', 'ventas.precio', 'ventas.ficha_id',
-                'ficha.id_ficha', 'ficha.fecha', 'ficha.estado',
-                'representante.apellido as ra', 'representante.nombre as rn',
-                'disciplinas.nombre as disciplina')
-            ->where('ventas.id_venta', '=', $id)->get();
+        $venta = Ventas::Find($id);
         $pdf = \App::make('dompdf.wrapper');
-        $pdf->loadView('comprobante', compact('venta'));
+        $pdf->loadView('comprobante', compact('venta'))->setPaper('A4')->setOrientation('portrait');
         return $pdf->stream();
     }
 }

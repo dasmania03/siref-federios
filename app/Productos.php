@@ -28,11 +28,10 @@ class Productos extends Model
         return $this->hasMany('App\Mensualidad', 'id_producto', 'producto_id');
     }
 
-    //  scope functions //
-//    public function scopeBuscar($query, $name){
-//        if(trim($name) != ""){
-//            $query->where("id_producto", $name);
-//                ->orWhere("apellido", "LIKE", strtoupper("%$name%"));
-//        }
-//    }
+    //scope functions
+    public function scopeBuscar($query, $name){
+        if(trim($name) != ""){
+            $query->where("id_producto", $name);
+        }
+    }
 }

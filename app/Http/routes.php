@@ -39,7 +39,12 @@ Route::group(['middleware' => ['auth']], function(){
     Route::resource('system/ventas','VentasController');
     Route::get('system/ventas/printcomprobante/{id}','VentasController@getPrintComprobante');
 
+    Route::get('system/fichas', 'FichaController@index');
+    Route::get('system/fichas/{id}', 'FichaController@showdetails');
+
     Route::resource('system/mensualidad', 'MensualidadController');
+    Route::get('/system/mensualidad/{idm}/producto/{idp}', 'MensualidadController@getDataMes');
+    Route::get('system/mensualidad/printcomprobante/{id}','MensualidadController@getPrintComprobante');
 
     Route::resource('system/productos', 'ProductosController');
 });

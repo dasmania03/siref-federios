@@ -33,7 +33,7 @@ class Deportista extends Model
     }
     
     // Un deportista puede estar en varias fichas //
-    public function ficha(){
+    public function fichas(){
         return $this->hasMany('App\Ficha', 'id_deportista','deportista_id');
     }
 

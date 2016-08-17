@@ -16,7 +16,7 @@
                     {!! Form::label('concepto', 'Concepto') !!}
                 </div>
                 <div class="ed-item base-70">
-                    {!! Form::select('concepto', ['inscripcion' => 'Inscripcion', 'mensualidad' => 'Mensualidad'], null, ['id' => 'concepto']) !!}
+                    {!! Form::select('concepto', ['inscripcion' => 'Inscripcion'], null, ['id' => 'concepto']) !!}
                 </div>
             </div>
             <div class="form-item ed-container">
@@ -32,7 +32,7 @@
                     {!! Form::label('valor', 'Valor a pagar U$D') !!}
                 </div>
                 <div class="ed-item base-70">
-                    {!! Form::text('valor', null, ['id' => 'valor', 'class' => 'input-sale']) !!}
+                    {!! Form::text('valor', '12.00', ['id' => 'valor', 'class' => 'input-sale']) !!}
                 </div>
             </div>
             {!! Form::hidden('idfc',  null,['id' => 'idfc']) !!}

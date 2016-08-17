@@ -24,7 +24,7 @@
                 <td>{{ $venta->concepto }}</td>
                 <td>{{ $venta->detalle }}</td>
                 <td>U$D {{ number_format($venta->precio, 2, '.', '') }}</td>
-                <td>{{ link_to('/system/pago-inscripcion?name='.$venta->ficha_id, $title = $venta->ficha_id, $attributes = array(), $secure = null) }}</td>
+                <td>{{ link_to('/system/pago-inscripcion?name='.$venta->ficha_id.'&typesearch=ficha', $title = $venta->ficha_id, $attributes = array(), $secure = null) }}</td>
                 <td>
                     {{--<a href="#" class="action-menu action-edit icon-pencil-square-o" title="Editar"></a>--}}
                     <a href="ventas/printcomprobante/{{ $venta->id_venta }}" target="_blank" class="action-menu icon-print" title="Imprimir Comprobante"></a>
