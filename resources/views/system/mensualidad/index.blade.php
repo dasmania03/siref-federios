@@ -12,12 +12,13 @@
             <th>Representante</th>
             <th>Ficha N°</th>
             <th>Pagadas / Comprobante</th>
-            <th>Acciones</th>
+            <th>Mes(es) Pendiente(s)</th>
         </tr>
         </thead>
         <tbody>
         @foreach($mensualidades as $mensualidad)
-            @php ($lastmont = 0)
+            @php($lastmont = 0) {{--Guarda el ultimo mes pagado--}}
+            @php($ok = false)
             <tr data-idm="{{ $mensualidad->id_mensualidad }}" data-idp="{{ $mensualidad->producto_id }}">
                 <td>{{ $mensualidad->id_mensualidad }}</td>
                 <td>{{ $mensualidad->ficha->disciplina->nombre }}</td>
@@ -29,15 +30,29 @@
                         Ninguna
                     @else
                         @foreach(json_decode($mensualidad->mensualidades, true) as $key => $value)
-                            {{ $meses[$key] }} / {{ link_to('system/ventas?name='.$value, $title = 'Ver Comprobante', $attributes = ['style'=>'color: #D33574'], $secure = null) }}<br>
+                            {{ $meses[$key] }} | {{ link_to('system/ventas?name='.$value, $title = '', $attributes = ['class' => 'action-menu icon-file-pdf-o', 'title' => 'Mostrar comprobante del mes de '.$meses[$key]], $secure = null) }}<br>
                             @php($lastmont = $key)
                         @endforeach
                     @endif
                 </td>
                 <td>
-                    @if($lastmont < 12)
-                        <a href="/system/mensualidad/{{ $mensualidad->id_mensualidad }}/producto/{{ $mensualidad->producto_id }}" class="action-menu icon-money" title="Cobrar mensualidad"></a>
-                    @endif
+                    @for($i = $mensualidad->mes_inicio; $i<=$mensualidad->mes_fin; $i++)
+                        @foreach(json_decode($mensualidad->mensualidades, true) as $key => $value)
+                            @if($key == $i)
+                                @php($ok = true)
+                                @break
+                            @endif
+                        @endforeach
+                        @if($ok)
+                            @php($ok = false)
+                        @else
+                            {{ $meses[$i] }} | {{ link_to('/system/mensualidad/'.$mensualidad->id_mensualidad.'/producto/'.$mensualidad->producto_id.'/mes/'.$i, $title = '', $attributes = ['class' => 'action-menu icon-money', 'title' => 'Cobrar el mes de '.$meses[$i]]) }}<br>
+                            @php($ok = false)
+                        @endif
+                        @if($i == date('n'))
+                            @break
+                        @endif
+                    @endfor
                 </td>
             </tr>
         @endforeach

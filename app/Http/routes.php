@@ -36,14 +36,16 @@ Route::group(['middleware' => ['auth']], function(){
     Route::resource('system/pago-inscripcion','PagoFichaController');
     Route::get('system/pago-inscripcion/printficha/{id}','PagoFichaController@getPrintFicha');
 
+    Route::get('/system/ventas/reportes', 'VentasController@generateReport');
+    Route::post('/system/ventas/report', 'VentasController@report');
     Route::resource('system/ventas','VentasController');
     Route::get('system/ventas/printcomprobante/{id}','VentasController@getPrintComprobante');
-
+    
     Route::get('system/fichas', 'FichaController@index');
     Route::get('system/fichas/{id}', 'FichaController@showdetails');
 
     Route::resource('system/mensualidad', 'MensualidadController');
-    Route::get('/system/mensualidad/{idm}/producto/{idp}', 'MensualidadController@getDataMes');
+    Route::get('/system/mensualidad/{idm}/producto/{idp}/mes/{mes}', 'MensualidadController@getDataMes');
     Route::get('system/mensualidad/printcomprobante/{id}','MensualidadController@getPrintComprobante');
 
     Route::resource('system/productos', 'ProductosController');

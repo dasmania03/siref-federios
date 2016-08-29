@@ -21,6 +21,14 @@
             </div>
             <div class="form-item ed-container">
                 <div class="ed-item base-30">
+                    {!! Form::label('monthly-payment', 'Mensualidad desde') !!}
+                </div>
+                <div class="ed-item base-70">
+                    {!! Form::select('monthly-payment', $meses, null, ['id' => 'monthly-payment', 'placeholder' => 'Seleccione mes...', 'required']) !!}
+                </div>
+            </div>
+            <div class="form-item ed-container">
+                <div class="ed-item base-30">
                     {!! Form::label('detalle', 'Detalle') !!}
                 </div>
                 <div class="ed-item base-70">

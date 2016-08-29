@@ -36,6 +36,7 @@
     <nav role="navigation">
         {!! $ventas->appends(Request::only(['name']))->render() !!}
     </nav>
+    {{ link_to('/system/ventas/reportes', $title = ' Reportes de Ventas', $attributes = ['class' => 'boton boton-primary icon-print'], $secure = null) }}
 @endsection
 @section('script')
     <script>

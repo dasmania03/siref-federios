@@ -13,6 +13,8 @@ class Mensualidad extends Model
     protected $fillable = [
         'ficha_id',
         'producto_id',
+        'mes_inicio',
+        'mes_fin',
         'mensualidades'
     ];
     

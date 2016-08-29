@@ -3136,7 +3136,7 @@ h1, h2, h3 {
 }
 
 .listado td {
-  border-bottom: 1px solid rgba(122, 169, 60, 0.15);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 .listado td {
@@ -3732,4 +3732,15 @@ nav[role="navigation"] {
   .listado.listado-detalle{
     width: 90%;
   }
+}
+
+/* Iconos del reporte */
+.type-file-icon{
+  display: none;
+}
+.type-file-icon:checked + label{
+  color: #1FACCA;
+}
+.type-file-icon + label{
+  font-size: 3.5em;
 }

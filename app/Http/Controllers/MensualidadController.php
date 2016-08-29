@@ -50,17 +50,10 @@ class MensualidadController extends Controller
         return view('system/mensualidad/showcomprobante', ['idventa' => $venta['id_venta']]);
     }
 
-    public function getDataMes($idm, $idp){
+    public function getDataMes($idm, $idp, $mes){
         $meses = $this->meses;
         $producto = Productos::find($idp);
         $mensualidad = Mensualidad::find($idm);
-        $mensualidades = json_decode($mensualidad->mensualidades, true);
-        if(empty($mensualidades)){
-            $mes = date("n"); // todo Hay que calcular
-        } else {
-            end( $mensualidades );
-            $mes = key($mensualidades) + 1;
-        }
         return view('system.mensualidad.create', compact('idm', 'producto', 'mensualidad','meses', 'mes'));
     }
 

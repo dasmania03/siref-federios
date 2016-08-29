@@ -16,11 +16,18 @@ use Illuminate\Support\Facades\Session;
 
 class PagoFichaController extends Controller
 {
+    protected $meses;
+    
+    public function __construct(){
+        $this->meses = ['1' => 'Enero','2' => 'Febrero','3' => 'Marzo','4' => 'Abril','5' => 'Mayo','6' => 'Junio','7' => 'Julio','8' => 'Agosto','9' => 'Septiembre','10' => 'Octubre','11' => 'Noviembre','12' => 'Diciembre'];
+    }
+    
     public function index(Request $request)
     {
+        $meses = $this->meses;
         $fichas = Ficha::buscar($request->get('name'), $request->get('typesearch'))->orderby('id_ficha', 'ASC')->paginate();
         $disciplinas = Disciplina::lists('nombre','id_disciplina');
-        return view('system.pagoinscripcion.index', compact('fichas', 'disciplinas'));
+        return view('system.pagoinscripcion.index', compact('fichas', 'disciplinas', 'meses'));
     }
 
     public function create()
@@ -32,15 +39,15 @@ class PagoFichaController extends Controller
     {
         $user = Auth::user();
         $venta = Ventas::create([
-            'fecha' => $request['fecha-comp'],
-            'concepto' => $request['concepto'],
-            'detalle' => $request['detalle'],
-            'precio' => $request['valor'],
-            'ficha_id' => $request['idfc'],
+            'fecha' => $request->get('fecha-comp'),
+            'concepto' => $request->get('concepto'),
+            'detalle' => $request->get('detalle'),
+            'precio' => $request->get('valor'),
+            'ficha_id' => $request->get('idfc'),
             'user_id' => $user['id'],
         ]);
 
-        $ficha = Ficha::find($request['idfc']);
+        $ficha = Ficha::find($request->get('idfc'));
         $date = explode('-', $ficha->deportista->fecha_nac);
         $age = Carbon::createFromDate($date[0],$date[1],$date[2])->age;
         $productos = Productos::get();
@@ -50,6 +57,8 @@ class PagoFichaController extends Controller
                     Mensualidad::create([
                         'ficha_id' => $ficha->id_ficha,
                         'producto_id' => $producto->id_producto,
+                        'meses_inicio' => $request->get('monthly-payment'),
+                        'mes_fin' => 12,
                         'mensualidades' => '{}'
                     ]);
                     break;
