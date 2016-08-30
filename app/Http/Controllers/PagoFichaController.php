@@ -57,7 +57,7 @@ class PagoFichaController extends Controller
                     Mensualidad::create([
                         'ficha_id' => $ficha->id_ficha,
                         'producto_id' => $producto->id_producto,
-                        'meses_inicio' => $request->get('monthly-payment'),
+                        'mes_inicio' => $request->get('monthly-payment'),
                         'mes_fin' => 12,
                         'mensualidades' => '{}'
                     ]);
